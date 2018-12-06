@@ -4,7 +4,8 @@
 
 * ### 数组
 #### Array.from
-
 Array.from方法用于将两类对象转为真正的数组：`类似数组的对象`（array-like object）和`可遍历（iterable）的对象`（包括 ES6 新增的数据结构 Set 和 Map）。
 
 对于还没有部署该方法的浏览器，可以用`Array.prototype.slice`方法替代
+#### Array.of
+Array.of方法用于将一组值，转换为数组。
