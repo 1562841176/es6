@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>throttle</title>
+</head>
+
+<body>
+    <div id='panel' style="background:red;width:200px;height:200px">
+
+    </div>
+    <script>
+        // 为了让用户的方法在某段时间内只执行一次，需要保存上次执行的时间点与定时器
+        function throttle(func, threshhold) {
+            let timeout = null;
+            let start = new Date();
+            var threshhold = threshhold || 160;
+            return function(e) {
+                var context = this,
+                    args = arguments,
+                    curr = new Date() - 0;
+                clearTimeout(timeout);
+                if (curr - start >= threshhold) {
+                    console.log("now:", curr, curr - start);
+                    func.apply(context, args);
+                    start = curr;
+                } else {
+                    timeout = setTimeout(function() {
+                        console.log("--------------");
+                        func.apply(context, args)
+                    }, threshhold)
+                }
+
+            };
+
+        }
+        var mousemove = throttle(function(e) {
+            console.log(e.pageX, e.pageY)
+        });
+        document.querySelector('#panel').addEventListener('mousemove', mousemove)
+    </script>
+
+</body>
+
+</html>

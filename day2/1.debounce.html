@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>debounce</title>
+</head>
+
+<body>
+    <input type="text">
+    <script>
+        function debounce(func, delay) {
+            let timeout = null;
+            return function(e) {
+                console.log('清除', timeout, e.target.value);
+                clearTimeout(timeout);
+                var context = this,
+                    args = arguments;
+                console.log('新的：', timeout, e.target.value);
+                timeout = setTimeout(function() {
+                    console.log("--------------");
+                    func.apply(context, args)
+                }, delay)
+            };
+
+        }
+        var validate = debounce(function(e) {
+            console.log('change', e.target.value, new Date - 0)
+        }, 380);
+        document.querySelector('input').addEventListener('input', validate)
+    </script>
+
+</body>
+
+</html>
